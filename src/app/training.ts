@@ -5,11 +5,25 @@ function sum(a: number, b: number): number {
 
 sum(15, 8);
 
-const string = (name: string): string => {
-  return `Hello, my name is ${name}`;
+const formatString = (text: string, format: string): string => {
+  if (format === 'uppercase') {
+    return text.toUpperCase();
+  }
+
+  if (format === 'lowercase') {
+    return text.toLowerCase();
+  }
+
+  if (format === 'capitalize') {
+    return text[0].toUpperCase() + text.slice(1).toLowerCase();
+  }
+
+  return text;
 };
 
-string('Gadel');
+formatString('gadel', 'uppercase');
+formatString('GADEL', 'lowercase');
+formatString('gADEL', 'capitalize');
 
 function removeSymbol(text: string, symbol: string): string {
   return text.replaceAll(symbol, '');
@@ -26,29 +40,17 @@ const textFormat: 'uppercase' | 'lowercase' | 'capitalize' = 'uppercase';
 interface IUser {
   name: string;
   surname: string;
-  age?: number;
-}
-
-let user: IUser = {
-  name: 'Ainur',
-  surname: 'Kharisov',
-  age: 26,
-};
-
-interface IUser2 {
-  name: string;
-  surname: string;
   age: number;
   country: string;
-  city: string;
+  city?: string;
 }
 
-interface Student extends IUser2 {
+interface Student extends IUser {
   role: string;
   isAdmin: boolean;
 }
 
-const user2: IUser2 = {
+const user: IUser = {
   name: 'Gadel',
   surname: 'Khuzin',
   age: 23,
@@ -59,60 +61,43 @@ const user2: IUser2 = {
 const student: Student = {
   name: 'Gadel',
   surname: 'Khuzin',
-  age: 26,
+  age: 23,
   country: 'Saudia Arabia',
   city: 'Medina',
-  role: 'student',
+  role: 'Angular developer',
   isAdmin: true,
 };
 
-interface IBooks {
-  title: string;
-  author: string;
-  yearOfRelease: number;
-  coverColor: string;
-  genre: string;
-}
-
-const books: IBooks[] = [
+const studentArr: Student[] = [
   {
-    title: 'The Genius of Birds',
-    author: 'Jennifer Ackerman',
-    yearOfRelease: 2016,
-    coverColor: 'Blue',
-    genre: 'Nature',
+    name: 'Gadel',
+    surname: 'Khuzin',
+    age: 23,
+    country: 'Saudia Arabia',
+    city: 'Medina',
+    role: 'Angular developer',
+    isAdmin: true,
   },
   {
-    title: 'Bird by Bird',
-    author: 'Anne Lamott',
-    yearOfRelease: 1994,
-    coverColor: 'White',
-    genre: 'Nature',
+    name: 'Ainur',
+    surname: 'Kharisov',
+    age: 26,
+    country: 'Russia',
+    city: 'Moskow',
+    role: 'Security',
+    isAdmin: false,
   },
   {
-    title: 'The Bird Way',
-    author: 'Jennifer Ackerman',
-    yearOfRelease: 2020,
-    coverColor: 'Yellow',
-    genre: 'Animal Behavior',
-  },
-  {
-    title: 'H Is for Hawk',
-    author: 'Helen Macdonald',
-    yearOfRelease: 2014,
-    coverColor: 'Red',
-    genre: 'Memoir',
-  },
-  {
-    title: 'Silent Spring',
-    author: 'Rachel Carson',
-    yearOfRelease: 1962,
-    coverColor: 'Green',
-    genre: 'Nature',
+    name: 'Niyaz',
+    surname: 'Ahmetshin',
+    age: 29,
+    country: 'Russia',
+    city: 'Kazan',
+    role: 'cook',
+    isAdmin: true,
   },
 ];
 
-const yearOfReleases = books.filter((book) => {
-  return book.yearOfRelease > 2000;
+const filterIsAdmin = studentArr.filter((student) => {
+  return student.isAdmin === false;
 });
-
