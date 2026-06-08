@@ -1,0 +1,73 @@
+@use './fonts';
+@use './normalize';
+
+* {
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.container {
+  display: block;
+  width: 1180px;
+  margin: 0 auto;
+}
+
+:root {
+  --color-white-soft: #fdfdfd;
+  --color-black: #18121e;
+  --color-yellow: #f2be22;
+  --color-green: #1a3e3e;
+  --color-gray-light: #f3f5f4;
+  --color-white: #ffffff;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.fs-26 {
+  font-size: 26px;
+}
+
+.fs-32 {
+  font-size: 32px;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.regular {
+  font-weight: 400;
+}

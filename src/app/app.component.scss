@@ -1,0 +1,229 @@
+.header {
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+
+  .header-container {
+    color: var(--color-white-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      width: 143px;
+      height: 61px;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      .company-name {
+        display: inline-block;
+        margin-top: 10px;
+        color: var(--color-white);
+        line-height: 100%;
+        letter-spacing: 40%;
+      }
+    }
+
+    .nav-list {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      gap: 24px;
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+
+    .consultation-btn {
+      width: 158px;
+      height: 44px;
+      border-radius: 4px;
+      border: none;
+      color: var(--color-green);
+      cursor: pointer;
+    }
+  }
+}
+
+.hero {
+  padding-bottom: 82px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 985px;
+  justify-content: end;
+  align-items: center;
+  gap: 41px;
+
+  .main-hero {
+    background-image: url('/images/hero/bg-mountains.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 985px;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .hero-content {
+    padding-top: 551px;
+  }
+
+  .hero-main__title {
+    font-weight: 300;
+    font-size: 50px;
+    text-align: left;
+    color: var(--color-white-soft);
+    line-height: 150%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 161px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    .form {
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      gap: 24px;
+
+      select,
+      input[type='date'] {
+        padding: 13px 16px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid #e1e3e4;
+        border-radius: 8px;
+        color: var(--color-white-soft);
+        line-height: 1.4;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        font-size: 16px;
+        font-weight: 700;
+
+        &:focus {
+          outline: none;
+          border-color: var(--color-green);
+          box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        &::-webkit-calendar-picker-indicator {
+          opacity: 0.6;
+          cursor: pointer;
+          background-image: url('/images/hero/form-icon/formkit-date.svg');
+        }
+
+        &::-moz-calendar-picker-indicator {
+          opacity: 0.6;
+          cursor: pointer;
+        }
+        &:invalid {
+          color: rgba(253, 253, 253, 1);
+        }
+      }
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url('/images/hero/form-icon/arrow-icon-bottom.svg');
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 16px;
+        cursor: pointer;
+
+        &:invalid {
+          color: #94a3b8;
+        }
+        option {
+          color: #1e293b;
+        }
+      }
+
+      .text {
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.3px;
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      width: 270px;
+      gap: 8px;
+    }
+
+    .date-wrapper {
+      position: relative;
+      width: 270px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      input[type='date'] {
+        &::-webkit-datetime-edit {
+          color: transparent;
+        }
+
+        &:focus::-webkit-datetime-edit,
+        &:valid::-webkit-datetime-edit {
+          color: var(--color-white-soft);
+        }
+
+        &:invalid + .fake-placeholder {
+          display: block;
+        }
+
+        &:valid + .fake-placeholder,
+        &:focus + .fake-placeholder {
+          display: none;
+        }
+      }
+
+      .fake-placeholder {
+        position: absolute;
+        left: 16px;
+        transform: translateY(80%);
+        color: var(--color-white-soft);
+        pointer-events: none;
+        white-space: nowrap;
+        display: none;
+      }
+    }
+
+    .plan-btn {
+      padding: 16px 36px;
+      border-radius: 4px;
+      background-color: var(--color-green);
+      color: var(--color-white-soft);
+      display: flex;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      line-height: 20px;
+      letter-spacing: 1.2%;
+
+      &:hover {
+        background-color: darken(#29482b, 5%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
