@@ -1,63 +1,158 @@
-<header class="header">
-  <div class="header-container container">
-    <a href="#" class="logo">
-      <img src="/images/logo/logo.svg" alt="Logo" />
-      <span class="company-name semi-bold fs-16">{{ companyName }}</span>
-    </a>
-    <nav class="nav">
-      <ul class="nav-list">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Про гида</a></li>
-        <li><a href="#">Программа тура</a></li>
-        <li><a href="#">Стоимость</a></li>
-        <li><a href="#">Блог</a></li>
-        <li><a href="#">Контакты</a></li>
-      </ul>
-    </nav>
-    <button type="submit" class="consultation-btn semi-bold fs-16">Консультация</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="main-hero"></div>
-  <div class="hero-content container">
-    <h1 class="hero-main__title container">
-      Насладись прогулкой в горах <br />
-      с командой единомышленников
-    </h1>
-  </div>
-  <div class="form-container container">
-    <form action="" class="form">
-      <div class="column">
-        <select name="location" id="location-list">
-          <option value="" disabled selected hidden>Локация для тура</option>
-          <option value="caucasus">Кавказ</option>
-          <option value="crimea">Крым</option>
-          <option value="sochi">Сочи</option>
-          <option value="kamchatka">Камчатка</option>
-          <option value="altai">Алтай</option>
-        </select>
-        <label class="text regular fs-14" for="location-list">выберите из списка</label>
+<div class="loading" *ngIf="isLoading">
+  <img src="/images/isLoading-image.svg" alt="Loading" />
+</div>
+<div *ngIf="!isLoading">
+  <header class="header">
+    <div class="header-container container">
+      <a href="#" class="logo">
+        <img src="/images/logo/logo.svg" alt="Logo" />
+        <span class="company-name semi-bold fs-16">{{ companyName }}</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">Про гида</a></li>
+          <li><a href="#">Программа тура</a></li>
+          <li><a href="#">Стоимость</a></li>
+          <li><a href="#">Блог</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <button type="submit" class="consultation-btn semi-bold fs-16">Консультация</button>
+        <div class="toggle-container">
+          <div class="timer-block" *ngIf="showTimer">
+            {{ currentTime | date : 'dd.MM.yyyy HH:mm:ss' }}
+          </div>
+          <div class="counter-block" *ngIf="!showTimer">
+            <button class="clicker-btn" (click)="plus()">+</button>
+            <p>{{ counter }}</p>
+            <button class="clicker-btn" (click)="minus()" [disabled]="counter <= 0">-</button>
+          </div>
+          <button class="switch-btn semi-bold fs-16" (click)="switchView()">
+            {{ showTimer ? 'Показать кликер' : 'Показать дату' }}
+          </button>
+        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="date-wrapper">
-        <input type="date" id="date" required />
-        <span class="fake-placeholder fs-16 bold">Дата похода</span>
-        <label class="text regular fs-14" for="date">укажите дату</label>
+  <section class="hero">
+    <div class="main-hero"></div>
+    <div class="hero-content container">
+      <h1 class="hero-main__title container">
+        Насладись прогулкой в горах <br />
+        с командой единомышленников
+      </h1>
+    </div>
+    <div class="form-container container">
+      <form action="" class="form">
+        <div class="column">
+          <select name="location" [(ngModel)]="selectedLocation" id="location-list">
+            <option value="" disabled selected hidden>Локация для тура</option>
+            <option value="caucasus">Кавказ</option>
+            <option value="crimea">Крым</option>
+            <option value="sochi">Сочи</option>
+            <option value="kamchatka">Камчатка</option>
+            <option value="altai">Алтай</option>
+          </select>
+          <label class="text regular fs-14" for="location-list">выберите из списка</label>
+        </div>
+
+        <div class="date-wrapper">
+          <input type="date" name="date" [(ngModel)]="dateInput" id="date" required />
+          <span class="fake-placeholder fs-16 bold">Дата похода</span>
+          <label class="text regular fs-14" for="date">укажите дату</label>
+        </div>
+
+        <div class="column">
+          <select name="participants" [(ngModel)]="selectedParticipant" id="participants-list">
+            <option value="" disabled selected hidden>Участники</option>
+            <option value="abdullah">АбдуЛлах</option>
+            <option value="abdurrahman">АбдурРахман</option>
+            <option value="gadel">Гадель</option>
+            <option value="ahmad">Ахмад</option>
+          </select>
+          <label class="text regular fs-14" for="participants-list">выберите из списка</label>
+        </div>
+
+        <button type="submit" [disabled]="!isFormValid" class="plan-btn fs-16 bold">
+          Найти программу
+        </button>
+      </form>
+    </div>
+    <div class="live-input-wrapper container">
+      <div class="input-wrapper">
+        <input
+          class="live-input bold fs-16"
+          type="text"
+          placeholder="Живой инпут"
+          [(ngModel)]="inputText"
+        />
+        <img class="live-input-icon" src="/images/hero/form-icon/live-input-icon.svg" alt="Arrow" />
       </div>
+      <span class="live-input-result">
+        {{ inputText }}
+      </span>
+    </div>
+  </section>
 
-      <div class="column">
-        <select name="participants" id="participants-list">
-          <option value="" disabled selected hidden>Участники</option>
-          <option value="abdullah">АбдуЛлах</option>
-          <option value="abdurrahman">АбдурРахман</option>
-          <option value="gadel">Гадель</option>
-          <option value="ahmad">Ахмад</option>
-        </select>
-        <label class="text regular fs-14" for="participants-list">выберите из списка</label>
+  <section class="study-section">
+    <div class="container study-content">
+      <div class="study-images">
+        <img class="study-mountain" src="/images/section/study-mountain.png" alt="Mountain" />
+        <div class="study-cabin-wrapper">
+          <img class="study-cabin" src="/images/section/study-cabin.png" alt="Cabin" />
+          <a href="#"
+            ><img class="study-video-icon" src="/images/section/study-video-icon.svg" alt="Video"
+          /></a>
+        </div>
       </div>
+      <div class="study-description">
+        <p class="study-subtitle regular fs-24">о нашем походе</p>
+        <h2 class="study-title extra-bold fs-32">
+          Исследуйте все горные массивы мира вместе с нами
+        </h2>
+        <p class="study-text regular fs-18">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+          Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
+          поисками в классической латинской литературе.
+        </p>
+        <button type="submit" class="study-btn semi-bold fs-16">Программа тура</button>
+      </div>
+    </div>
+  </section>
 
-      <button type="submit" class="plan-btn fs-16 bold">Найти программу</button>
-    </form>
-  </div>
-</section>
+  <section class="program-section">
+    <div class="container program-content">
+      <div class="program-information">
+        <p class="program-subtitle regular fs-24">наше предложение</p>
+        <h2 class="program-title extra-bold fs-32">Лучшие программы для тебя</h2>
+        <p class="program-description regular fs-18">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+        </p>
+        <div class="program-list">
+          @for (program of programs; track program.id) {
+          <div class="program-list-content">
+            <img class="program-list-image" [src]="program.image" alt="Иконка программы" />
+            <div class="program-list-text">
+              <h4 class="program-list-title bold fs-18">{{ program.title }}</h4>
+              <p class="program-list-description regular fs-14">{{ program.description }}</p>
+            </div>
+          </div>
+          }
+        </div>
+        <button type="submit" class="program-btn semi-bold fs-16">Стоимость программ</button>
+      </div>
+      <div class="program-gallery">
+        @for (photo of photos; track photo.id) {
+        <div class="program-gallery-item">
+          <img class="program-gallery-image" [src]="photo.image" [alt]="photo.alt" />
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>
